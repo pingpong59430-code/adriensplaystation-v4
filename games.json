@@ -1,6 +1,34 @@
 [
   {
-    "name": "Test Game",
-    "path": "games/test-game/index.html"
+    "name": "Candy Crush",
+    "path": "games/candy-crush/index.html"
+  },
+  {
+    "name": "Archery Game",
+    "path": "games/archery-game/index.html"
+  },
+  {
+    "name": "Speed Typing Game",
+    "path": "games/speed-typing-game/index.html"
+  },
+  {
+    "name": "Breakout Game",
+    "path": "games/breakout-game/index.html"
+  },
+  {
+    "name": "Minesweeper",
+    "path": "games/minesweeper/index.html"
+  },
+  {
+    "name": "Tetris",
+    "path": "games/tetris/index.html"
+  },
+  {
+    "name": "Ping Pong",
+    "path": "games/ping-pong/index.html"
+  },
+  {
+    "name": "Tower Blocks",
+    "path": "games/tower-blocks/index.html"
   }
 ]
