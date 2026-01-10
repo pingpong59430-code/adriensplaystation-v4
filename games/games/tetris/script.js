@@ -1,100 +1,124 @@
-(function () {
-  var isStart = false;
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("canvas");
+  const startBtn = document.getElementById("start");
 
-  var tetris = {
-    board: [],
-    canvas: null,
-    pSize: 20,
-    canvasHeight: 440,
-    canvasWidth: 200,
-    boardHeight: 0,
-    boardWidth: 0,
-    spawnX: 4,
-    spawnY: 1,
+  const COLS = 10;
+  const ROWS = 22;
+  const SIZE = 20;
+  let board = [];
+  let piece = null;
+  let timer = null;
 
-    shapes: [
-      [[-1, 1],[0,1],[1,1],[0,0]],
-      [[-1,0],[0,0],[1,0],[2,0]],
-      [[-1,-1],[-1,0],[0,0],[1,0]],
-      [[1,-1],[-1,0],[0,0],[1,0]],
-      [[0,-1],[1,-1],[-1,0],[0,0]],
-      [[-1,-1],[0,-1],[0,0],[1,0]],
-      [[0,-1],[1,-1],[0,0],[1,0]]
-    ],
+  const SHAPES = [
+    [[1,1,1,1]],
+    [[1,1],[1,1]],
+    [[0,1,0],[1,1,1]],
+    [[1,0,0],[1,1,1]],
+    [[0,0,1],[1,1,1]],
+    [[1,1,0],[0,1,1]],
+    [[0,1,1],[1,1,0]]
+  ];
 
-    curShape: null,
-    curShapeIndex: 0,
-    curX: 0,
-    curY: 0,
-    curSqs: [],
-    speed: 600,
-    timer: null,
+  function resetBoard() {
+    board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+  }
 
-    init: function () {
-      isStart = true;
-      this.canvas = document.getElementById("canvas");
-      this.initBoard();
-      this.newShape();
-      this.bindKeys();
-      this.loop();
-    },
+  function newPiece() {
+    return {
+      shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
+      x: 4,
+      y: 0
+    };
+  }
 
-    initBoard: function () {
-      this.boardHeight = this.canvasHeight / this.pSize;
-      this.boardWidth = this.canvasWidth / this.pSize;
-    },
+  function draw() {
+    canvas.innerHTML = "";
 
-    newShape: function () {
-      this.curShapeIndex = Math.floor(Math.random() * this.shapes.length);
-      this.curShape = this.shapes[this.curShapeIndex];
-      this.curX = this.spawnX;
-      this.curY = this.spawnY;
-      this.draw();
-    },
-
-    draw: function () {
-      this.clear();
-      for (let i = 0; i < this.curShape.length; i++) {
-        const x = (this.curShape[i][0] + this.curX) * this.pSize;
-        const y = (this.curShape[i][1] + this.curY) * this.pSize;
-        const el = document.createElement("div");
-        el.className = "square type" + this.curShapeIndex;
-        el.style.left = x + "px";
-        el.style.top = y + "px";
-        this.canvas.appendChild(el);
-        this.curSqs.push(el);
-      }
-    },
-
-    clear: function () {
-      this.curSqs.forEach(el => this.canvas.removeChild(el));
-      this.curSqs = [];
-    },
-
-    move: function (dx, dy) {
-      this.curX += dx;
-      this.curY += dy;
-      this.draw();
-    },
-
-    loop: function () {
-      this.timer = setInterval(() => {
-        this.move(0, 1);
-      }, this.speed);
-    },
-
-    bindKeys: function () {
-      document.addEventListener("keydown", e => {
-        if (!isStart) return;
-        if (e.key === "ArrowLeft") this.move(-1, 0);
-        if (e.key === "ArrowRight") this.move(1, 0);
-        if (e.key === "ArrowDown") this.move(0, 1);
+    board.forEach((row, y) => {
+      row.forEach((v, x) => {
+        if (v) drawBlock(x, y);
       });
-    }
-  };
+    });
 
-  document.getElementById("start").addEventListener("click", function () {
-    this.style.display = "none";
-    if (!isStart) tetris.init();
+    piece.shape.forEach((row, y) => {
+      row.forEach((v, x) => {
+        if (v) drawBlock(piece.x + x, piece.y + y, true);
+      });
+    });
+  }
+
+  function drawBlock(x, y, active = false) {
+    const el = document.createElement("div");
+    el.className = "square " + (active ? "type1" : "type3");
+    el.style.left = x * SIZE + "px";
+    el.style.top = y * SIZE + "px";
+    canvas.appendChild(el);
+  }
+
+  function collide(px, py, shape) {
+    return shape.some((row, y) =>
+      row.some((v, x) => {
+        if (!v) return false;
+        const nx = px + x;
+        const ny = py + y;
+        return nx < 0 || nx >= COLS || ny >= ROWS || (ny >= 0 && board[ny][nx]);
+      })
+    );
+  }
+
+  function merge() {
+    piece.shape.forEach((row, y) => {
+      row.forEach((v, x) => {
+        if (v) board[piece.y + y][piece.x + x] = 1;
+      });
+    });
+  }
+
+  function drop() {
+    if (!collide(piece.x, piece.y + 1, piece.shape)) {
+      piece.y++;
+    } else {
+      merge();
+      piece = newPiece();
+      if (collide(piece.x, piece.y, piece.shape)) {
+        clearInterval(timer);
+        alert("GAME OVER");
+        return;
+      }
+    }
+    draw();
+  }
+
+  function move(dir) {
+    if (!collide(piece.x + dir, piece.y, piece.shape)) {
+      piece.x += dir;
+      draw();
+    }
+  }
+
+  function rotate() {
+    const rotated = piece.shape[0].map((_, i) =>
+      piece.shape.map(r => r[i]).reverse()
+    );
+    if (!collide(piece.x, piece.y, rotated)) {
+      piece.shape = rotated;
+      draw();
+    }
+  }
+
+  document.addEventListener("keydown", e => {
+    if (!piece) return;
+    if (e.key === "ArrowLeft") move(-1);
+    if (e.key === "ArrowRight") move(1);
+    if (e.key === "ArrowDown") drop();
+    if (e.key === "ArrowUp") rotate();
   });
-})();
+
+  startBtn.onclick = () => {
+    startBtn.style.display = "none";
+    resetBoard();
+    piece = newPiece();
+    draw();
+    timer = setInterval(drop, 500);
+  };
+});
