@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Adrien's PlayStation V4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="menu">
+  <h1>🎮 Adrien's PlayStation V4</h1>
+
+  <div class="games">
+    <div class="game-card" onclick="launchGame('games/game1/index.html')">
+      <img src="assets/icons/game.png">
+      <span>Jeu 1</span>
+    </div>
+  </div>
+</div>
+
+<div id="player">
+  <button onclick="closeGame()">⬅ Retour</button>
+  <iframe id="gameFrame"></iframe>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
