@@ -8,9 +8,8 @@ fetch("games.json")
       card.className = "game-card";
       card.tabIndex = 0;
 
+      // TEXTE SEUL (PAS D’IMAGE)
       card.innerHTML = `<span>${game.name}</span>`;
-
-      `;
 
       card.onclick = () => launchGame(game.path);
       card.onkeydown = e => {
