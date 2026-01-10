@@ -20,6 +20,9 @@ fetch("games.json")
 
       container.appendChild(card);
     });
+  })
+  .catch(err => {
+    console.error("Erreur chargement games.json", err);
   });
 
 function launchGame(path) {
