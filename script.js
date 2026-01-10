@@ -1,3 +1,6 @@
+document.addEventListener("click", () => {
+  document.body.requestFullscreen?.();
+}, { once: true });
 function launchGame(path) {
   document.getElementById("menu").style.display = "none";
   document.getElementById("player").style.display = "block";
