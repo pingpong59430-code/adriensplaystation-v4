@@ -1,11 +1,30 @@
-document.addEventListener("click", () => {
-  document.body.requestFullscreen?.();
-}, { once: true });
+fetch("games.json")
+  .then(res => res.json())
+  .then(games => {
+    const container = document.querySelector(".games");
+
+    games.forEach(game => {
+      const card = document.createElement("div");
+      card.className = "game-card";
+      card.tabIndex = 0;
+
+      card.innerHTML = `
+        <img src="assets/icons/game.png">
+        <span>${game.name}</span>
+      `;
+
+      card.onclick = () => launchGame(game.path);
+      card.onkeydown = e => {
+        if (e.key === "Enter") launchGame(game.path);
+      };
+
+      container.appendChild(card);
+    });
+  });
+
 function launchGame(path) {
   document.getElementById("menu").style.display = "none";
   document.getElementById("player").style.display = "block";
-
-  // CHEMIN RELATIF AU SITE (IMPORTANT)
   document.getElementById("gameFrame").src = path;
 }
 
