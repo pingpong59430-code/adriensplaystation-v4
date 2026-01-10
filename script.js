@@ -8,9 +8,8 @@ fetch("games.json")
       card.className = "game-card";
       card.tabIndex = 0;
 
-      card.innerHTML = `
-        <img src="assets/icons/game.png">
-        <span>${game.name}</span>
+      card.innerHTML = `<span>${game.name}</span>`;
+
       `;
 
       card.onclick = () => launchGame(game.path);
