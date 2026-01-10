@@ -1,6 +1,8 @@
 function launchGame(path) {
   document.getElementById("menu").style.display = "none";
   document.getElementById("player").style.display = "block";
+
+  // CHEMIN RELATIF AU SITE (IMPORTANT)
   document.getElementById("gameFrame").src = path;
 }
 
