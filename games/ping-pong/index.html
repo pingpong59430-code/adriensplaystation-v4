@@ -1,43 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>Talha - Ping Pong Game</title>
-    <!-- Add the Bootstrap CSS file -->
+
+    <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
 
     <link rel="icon" href="https://i.ibb.co/M6KTWnf/pic.jpg" />
-
-    <!-- 👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻-->
-    <!-- Also uploaded the demo of this code in a gif : https://c.tenor.com/x8v1oNUOmg4AAAAd/tenor.gif-->
-    <!-- 👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻-->
-
-    <!-- 👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻👇🏻-->
-    <!-- More html-css-js Games Calculators Games Cards Elements Projects on https://www.github.com/he-is-talha -->
-    <!-- 👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻👆🏻-->
-
-    <!-- Add the Bootstrap JavaScript file -->
-
     <link rel="stylesheet" href="style.css" />
+
+    <!-- STYLE IMPORTANT POUR VOIR LE JEU -->
     <style>
+      body {
+        background: black;
+        color: white;
+        text-align: center;
+      }
+
       canvas {
-        border: 1px solid black;
+        background: black;        /* 🔥 OBLIGATOIRE */
+        border: 2px solid white;
+        display: block;
+        margin: 20px auto;
+      }
+
+      .button {
+        margin-top: 10px;
       }
     </style>
   </head>
+
   <body>
     <div class="container">
       <canvas id="canvas" width="600" height="400"></canvas>
     </div>
+
     <div class="button">
-      <button id="start-btn" class="btn">Start</button>
-      <button id="pause-btn" class="btn">Pause</button>
-      <button id="restart-btn" class="btn">Restart</button>
+      <button id="start-btn" class="btn btn-light">Start</button>
+      <button id="pause-btn" class="btn btn-light">Pause</button>
+      <button id="restart-btn" class="btn btn-light">Restart</button>
     </div>
-    <p class="control">Control: Player Left(W and S) | Player Right(↑ and ↓)</p>
-    <!-- Add a modal element with an ID -->
+
+    <p class="control">
+      Control: Player Left (W / S) | Player Right (↑ / ↓)
+    </p>
+
+    <!-- MODAL -->
     <div class="modal" tabindex="-1" role="dialog" id="message-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -58,8 +70,11 @@
       </div>
     </div>
 
+    <!-- SCRIPTS (ORDRE IMPORTANT) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
+
+    <!-- SCRIPT DU JEU -->
+    <script src="script.js" defer></script>
   </body>
 </html>
