@@ -1,6 +1,6 @@
 [
   {
-    "name": "candy-crush",
+    "name": "Candy Crush",
     "path": "games/candy-crush/index.html"
   },
   {
@@ -20,7 +20,7 @@
     "path": "games/minesweeper/index.html"
   },
   {
-    "name": "tetris",
+    "name": "Tetris",
     "path": "games/tetris/index.html"
   },
   {
