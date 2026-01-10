@@ -1,4 +1,6 @@
-{
-  "name": "Test Game",
-  "path": "./games/test-game/index.html"
-}
+[
+  {
+    "name": "Test Game",
+    "path": "games/test-game/index.html"
+  }
+]
