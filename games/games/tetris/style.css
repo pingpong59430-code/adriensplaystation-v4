@@ -1,89 +1,66 @@
+/* RESET */
 body {
-  overflow: hidden;
-  background: #d7d7d7;
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: Arial, sans-serif;
 }
+
+/* CONTENEUR PRINCIPAL */
 #tetris {
-  width: 360px;
-  border: 1px solid black;
+  display: flex;
+  gap: 20px;
   padding: 20px;
 }
-#canvas {
-  width: 200px;
-  height: 440px;
-  background-color: #000;
-  position: relative;
-  color: #fff;
+
+/* INFOS */
+#info {
+  min-width: 150px;
 }
-#canvas h1 {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  font-size: 30px;
-  padding-top: 200px;
-}
-.piece {
-  border: 1px solid white;
-  position: absolute;
+
+#info p {
+  margin: 5px 0;
 }
 
 #start {
-  animation: blink 0.7s steps(2, start) infinite;
-  background: #e1ff5f;
-  border-radius: 2px;
-  color: #202020;
+  padding: 10px;
+  margin-top: 10px;
   cursor: pointer;
-  font-size: 28px;
 }
 
-@keyframes blink {
-  to {
-    outline: #e1ff5f solid 1px;
-  }
+/* ZONE DE JEU */
+#canvas {
+  position: relative;          /* OBLIGATOIRE */
+  width: 200px;
+  height: 440px;
+  background: #111;
+  border: 2px solid white;
 }
 
-.red {
-  color: #f00000;
-}
-
+/* BLOCS */
 .square {
-  position: absolute;
-  width: 19px;
-  height: 19px;
-  border: 1px solid white;
+  position: absolute;          /* OBLIGATOIRE */
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 1px solid #000;
 }
-.type0 {
-  background-color: #a000f0;
-}
-.type1 {
-  background-color: #00f0f0;
-}
-.type2 {
-  background-color: #f0a000;
-}
-.type3 {
-  background-color: #0000f0;
-}
-.type4 {
-  background-color: #00f000;
-}
-.type5 {
-  background-color: #f00000;
-}
-.type6 {
-  background-color: #f0f000;
-}
+
+/* COULEURS DES PIECES */
+.type0 { background: #9b59b6; }
+.type1 { background: #1abc9c; }
+.type2 { background: #3498db; }
+.type3 { background: #e67e22; }
+.type4 { background: #e74c3c; }
+.type5 { background: #f1c40f; }
+.type6 { background: #2ecc71; }
+
+/* NEXT SHAPE */
 #next_shape {
   position: relative;
-  background-color: #000;
+  width: 80px;
+  height: 80px;
+  background: #222;
+  margin-bottom: 10px;
   border: 1px solid white;
-  width: 110px;
-  height: 110px;
-}
-#info {
-  background-color: #000;
-  color: #fff;
-  float: right;
-  width: 110px;
-  height: 420px;
-  padding: 10px;
 }
