@@ -7,15 +7,20 @@
 </head>
 <body>
 
-<!-- SCÈNE PS2 -->
-<div id="scene">
-  <img src="images/ps2.png" id="ps2">
-  <img src="images/tv.png" id="tv">
-  <p id="hint">Appuie sur la PS2</p>
+<!-- ÉCRAN BOOT -->
+<div id="boot-screen">
+  <div class="crt"></div>
+  <div class="boot-text">Appuyez sur ❌</div>
 </div>
 
-<!-- MENU (TV) -->
-<div id="menu" class="menu"></div>
+<!-- MENU -->
+<div id="menu">
+  <h1>🎮 Adrien's PlayStation V4</h1>
+  <div id="games"></div>
+</div>
+
+<audio id="bootSound" src="sounds/boot.mp3"></audio>
+<audio id="clickSound" src="sounds/click.mp3"></audio>
 
 <script src="script.js"></script>
 </body>
