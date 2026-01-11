@@ -1,46 +1,53 @@
-const startScreen = document.getElementById("startScreen");
+const scene = document.getElementById("scene");
+const ps2 = document.getElementById("ps2");
+const tv = document.getElementById("tv");
+const hint = document.getElementById("hint");
 const menu = document.getElementById("menu");
-const player = document.getElementById("player");
-const frame = document.getElementById("gameFrame");
-const closeBtn = document.getElementById("close");
-const loading = document.getElementById("loading");
 
-/* 🔊 SONS */
+/* SONS */
 const ps2Sound = new Audio("sounds/ps2.mp3");
 const clickSound = new Audio("sounds/clicks.mp3");
 const music = new Audio("sounds/music.mp3");
-
-/* RÉGLAGES */
-ps2Sound.volume = 0.8;
-clickSound.volume = 0.6;
-music.volume = 0.35;
 music.loop = true;
+music.volume = 0.35;
 
-let started = false;
+let step = 0;
 
-/* ▶️ DÉMARRAGE */
-startScreen.addEventListener("click", async () => {
-  if (started) return;
-  started = true;
+/* ÉTAPE 1 : PS2 */
+ps2.addEventListener("click", () => {
+  if (step !== 0) return;
+  step = 1;
 
-  // Déblocage audio navigateur
-  await clickSound.play().catch(() => {});
-  clickSound.pause();
-  clickSound.currentTime = 0;
-
-  ps2Sound.play().catch(() => {});
-
-  startScreen.style.display = "none";
-
-  // 🎧 musique démarre après boot
-  setTimeout(() => {
-    music.play().catch(() => {});
-    menu.style.display = "grid";
-    loadGames();
-  }, 1200);
+  clickSound.play().catch(()=>{});
+  ps2.style.transform = "scale(1.05)";
+  hint.textContent = "Appuie sur la TV";
 });
 
-/* 🎮 MENU */
+/* ÉTAPE 2 : TV */
+tv.addEventListener("click", () => {
+  if (step !== 1) return;
+  step = 2;
+
+  ps2Sound.play().catch(()=>{});
+  tv.style.filter = "brightness(1)";
+  hint.textContent = "";
+
+  /* ZOOM DANS LA TV */
+  setTimeout(() => {
+    scene.style.transition = "transform 1.5s";
+    scene.style.transform = "scale(4)";
+  }, 300);
+
+  /* ARRIVÉE MENU */
+  setTimeout(() => {
+    scene.style.display = "none";
+    music.play().catch(()=>{});
+    menu.style.display = "grid";
+    loadGames();
+  }, 1800);
+});
+
+/* CHARGER JEUX */
 function loadGames() {
   fetch("games.json")
     .then(r => r.json())
@@ -50,42 +57,7 @@ function loadGames() {
         const card = document.createElement("div");
         card.className = "game-card";
         card.textContent = game.name;
-
-        card.onclick = () => {
-          clickSound.currentTime = 0;
-          clickSound.play().catch(() => {});
-          launchGame(game.path);
-        };
-
         menu.appendChild(card);
       });
     });
 }
-
-/* ▶️ LANCER JEU */
-function launchGame(path) {
-  menu.style.display = "none";
-  loading.style.display = "flex";
-
-  // baisse musique pendant le jeu
-  music.volume = 0.15;
-
-  setTimeout(() => {
-    player.style.display = "block";
-    frame.src = path;
-
-    frame.onload = () => {
-      loading.style.display = "none";
-    };
-  }, 500);
-}
-
-/* ⬅️ RETOUR */
-closeBtn.onclick = () => {
-  frame.src = "";
-  player.style.display = "none";
-  menu.style.display = "grid";
-
-  // remet la musique normale
-  music.volume = 0.35;
-};
