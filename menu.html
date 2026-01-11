@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      background: #001020;
+      color: white;
+      font-family: Arial;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .game {
+      background: rgba(255,255,255,0.08);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .game:hover {
+      background: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+
+<div class="menu">
+  <div class="game" onclick="load('games/tetris/index.html')">Tetris</div>
+  <div class="game" onclick="load('games/ping-pong/index.html')">Ping Pong</div>
+  <div class="game" onclick="load('games/candy-crush/index.html')">Candy Crush</div>
+</div>
+
+<script>
+function load(url) {
+  parent.document.getElementById("screen").src = url;
+}
+</script>
+
+</body>
+</html>
