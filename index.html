@@ -7,23 +7,15 @@
 </head>
 <body>
 
-<!-- ÉCRAN DÉMARRAGE -->
-<div id="startScreen">🎮 Cliquer pour démarrer</div>
+<!-- SCÈNE PS2 -->
+<div id="scene">
+  <img src="images/ps2.png" id="ps2">
+  <img src="images/tv.png" id="tv">
+  <p id="hint">Appuie sur la PS2</p>
+</div>
 
-<!-- MENU -->
+<!-- MENU (TV) -->
 <div id="menu" class="menu"></div>
-
-<!-- LECTEUR DE JEU -->
-<div id="player">
-  <button id="close">⬅ Retour</button>
-  <iframe id="gameFrame"></iframe>
-</div>
-
-<!-- ÉCRAN DE CHARGEMENT -->
-<div id="loading">
-  <div class="loader"></div>
-  <p>Chargement du jeu…</p>
-</div>
 
 <script src="script.js"></script>
 </body>
