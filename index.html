@@ -5,36 +5,14 @@
   <title>Adrien's PlayStation V4</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- UNLOCK AUDIO -->
-<div id="audioUnlock">
-  <p>🎮 Cliquer pour démarrer</p>
+<div id="startScreen">
+  🎮 Cliquer pour démarrer
 </div>
 
-<!-- MENU -->
-<div id="menu">
-  <h1>🎮 Adrien's PlayStation V4</h1>
-  <div class="games"></div>
-</div>
-
-<!-- PLAYER -->
-<div id="player">
-  <button onclick="closeGame()">⬅ Retour</button>
-  <iframe id="gameFrame"></iframe>
-</div>
-
-<!-- BOOT SCREEN -->
-<div id="bootScreen">
-  <div class="boot-content">
-    <h1 id="bootTitle">Chargement…</h1>
-    <p>Veuillez patienter</p>
-  </div>
-</div>
-
-<!-- AUDIO PS2 (UN SEUL FICHIER) -->
-<audio id="psSound" src="sounds/ps2.mp3"></audio>
+<audio id="bootSound" src="sounds/ps2.mp3"></audio>
+<audio id="clickSound" src="sounds/click.mp3"></audio>
 
 <script src="script.js"></script>
 </body>
