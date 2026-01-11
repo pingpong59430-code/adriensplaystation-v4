@@ -23,11 +23,34 @@ fetch("games.json")
     console.error("Erreur chargement games.json", err);
   });
 
-function launchGame(path) {
-  document.getElementById("menu").style.display = "none";
-  document.getElementById("player").style.display = "block";
-  document.getElementById("gameFrame").src = path;
+function launchGame(path, name) {
+  const menu = document.getElementById("menu");
+  const player = document.getElementById("player");
+  const frame = document.getElementById("gameFrame");
+  const boot = document.getElementById("bootScreen");
+  const title = document.getElementById("bootTitle");
+
+  const clickSound = document.getElementById("clickSound");
+  const bootSound = document.getElementById("bootSound");
+
+  // 🔊 sons
+  clickSound.currentTime = 0;
+  clickSound.play();
+
+  title.textContent = name;
+  menu.style.display = "none";
+  boot.style.display = "flex";
+
+  setTimeout(() => {
+    bootSound.currentTime = 0;
+    bootSound.play();
+
+    boot.style.display = "none";
+    player.style.display = "block";
+    frame.src = path;
+  }, 1200);
 }
+
 
 function closeGame() {
   document.getElementById("gameFrame").src = "";
