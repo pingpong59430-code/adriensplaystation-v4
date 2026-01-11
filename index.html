@@ -7,22 +7,19 @@
 </head>
 <body>
 
-<!-- BOOT -->
-<div id="boot">
-  <p>🎮 Cliquer pour démarrer</p>
+<div id="bootScreen">
+  🎮 Cliquer pour démarrer
 </div>
 
-<!-- SCÈNE -->
-<div id="scene">
-  <img src="assets/ps2.png" id="ps2">
+<div id="scene" class="hidden">
+  <img src="images/ps2.png" id="ps2">
   <div id="tv">
-    <iframe id="screen"></iframe>
-    <div class="crt"></div>
+    <iframe id="screen" src="menu.html"></iframe>
   </div>
 </div>
 
-<audio id="bootSound" src="sounds/boot.mp3"></audio>
-<audio id="clickSound" src="sounds/click.mp3"></audio>
+<audio id="bootSound" src="sounds/ps2.mp3"></audio>
+<audio id="clickSound" src="sounds/clicks.mp3"></audio>
 
 <script src="script.js"></script>
 </body>
