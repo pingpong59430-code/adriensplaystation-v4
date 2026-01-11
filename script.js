@@ -33,6 +33,29 @@ function launchGame(path, name) {
   const clickSound = document.getElementById("clickSound");
   const bootSound = document.getElementById("bootSound");
 
+  // 🔊 son clic (interaction utilisateur)
+  clickSound.currentTime = 0;
+  clickSound.play();
+
+  title.textContent = name;
+  menu.style.display = "none";
+  boot.style.display = "flex";
+
+  // 🔊 son boot ENCHAÎNÉ (autorisé)
+  clickSound.onended = () => {
+    bootSound.currentTime = 0;
+    bootSound.play();
+  };
+
+  // lancement du jeu
+  setTimeout(() => {
+    boot.style.display = "none";
+    player.style.display = "block";
+    frame.src = path;
+  }, 1200);
+}
+
+
   // 🔊 sons
   clickSound.currentTime = 0;
   clickSound.play();
