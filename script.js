@@ -4,22 +4,22 @@ const player = document.getElementById("player");
 const frame = document.getElementById("gameFrame");
 const closeBtn = document.getElementById("close");
 
-/* ✅ SONS — NOMS CORRIGÉS */
-const bootSound = new Audio("sounds/ps2.mp3");
-const clickSound = new Audio("sounds/clicks.mp3");
+/* 🔊 SONS — BIEN MAPPÉS */
+const ps2Sound = new Audio("./sounds/ps2.mp3");      // démarrage
+const clickSound = new Audio("./sounds/clicks.mp3"); // clic menu
 
-bootSound.volume = 0.7;
+ps2Sound.volume = 0.8;
 clickSound.volume = 0.6;
 
 let started = false;
 
-/* ▶️ DÉMARRAGE */
+/* ▶️ DÉMARRAGE (PS2) */
 startScreen.addEventListener("click", () => {
   if (started) return;
   started = true;
 
-  bootSound.currentTime = 0;
-  bootSound.play().catch(() => {});
+  ps2Sound.currentTime = 0;
+  ps2Sound.play().catch(() => {});
 
   startScreen.style.display = "none";
 
@@ -29,10 +29,10 @@ startScreen.addEventListener("click", () => {
   }, 1500);
 });
 
-/* 🎮 CHARGER LES JEUX */
+/* 🎮 MENU JEUX */
 function loadGames() {
   fetch("games.json")
-    .then(res => res.json())
+    .then(r => r.json())
     .then(games => {
       menu.innerHTML = "";
 
@@ -49,18 +49,17 @@ function loadGames() {
 
         menu.appendChild(card);
       });
-    })
-    .catch(err => console.error("Erreur games.json", err));
+    });
 }
 
-/* ▶️ LANCER UN JEU */
+/* ▶️ LANCER JEU */
 function launchGame(path) {
   menu.style.display = "none";
   player.style.display = "block";
   frame.src = path;
 }
 
-/* ⬅️ RETOUR MENU */
+/* ⬅️ RETOUR */
 closeBtn.addEventListener("click", () => {
   frame.src = "";
   player.style.display = "none";
