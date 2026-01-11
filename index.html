@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Adrien's PlayStation V4</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ÉCRAN DÉMARRAGE -->
-  <div id="startScreen">
-    🎮 Cliquer pour démarrer
-  </div>
+<!-- ÉCRAN DÉMARRAGE -->
+<div id="startScreen">🎮 Cliquer pour démarrer</div>
 
-  <!-- MENU -->
-  <div id="menu"></div>
+<!-- MENU -->
+<div id="menu" class="menu"></div>
 
-  <!-- PLAYER -->
-  <div id="player">
-    <button id="close">⬅ Retour</button>
-    <iframe id="gameFrame"></iframe>
-  </div>
+<!-- LECTEUR DE JEU -->
+<div id="player">
+  <button id="close">⬅ Retour</button>
+  <iframe id="gameFrame"></iframe>
+</div>
 
-  <script src="script.js"></script>
+<!-- ÉCRAN DE CHARGEMENT -->
+<div id="loading">
+  <div class="loader"></div>
+  <p>Chargement du jeu…</p>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
