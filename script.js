@@ -5,12 +5,16 @@ const frame = document.getElementById("gameFrame");
 const closeBtn = document.getElementById("close");
 const loading = document.getElementById("loading");
 
-/* 🎵 SONS (NOMS FIXES, PAS D’INVERSION) */
+/* 🔊 SONS */
 const ps2Sound = new Audio("sounds/ps2.mp3");
 const clickSound = new Audio("sounds/clicks.mp3");
+const music = new Audio("sounds/music.mp3");
 
+/* RÉGLAGES */
 ps2Sound.volume = 0.8;
 clickSound.volume = 0.6;
+music.volume = 0.35;
+music.loop = true;
 
 let started = false;
 
@@ -19,7 +23,7 @@ startScreen.addEventListener("click", async () => {
   if (started) return;
   started = true;
 
-  // Débloque l’audio navigateur
+  // Déblocage audio navigateur
   await clickSound.play().catch(() => {});
   clickSound.pause();
   clickSound.currentTime = 0;
@@ -28,7 +32,9 @@ startScreen.addEventListener("click", async () => {
 
   startScreen.style.display = "none";
 
+  // 🎧 musique démarre après boot
   setTimeout(() => {
+    music.play().catch(() => {});
     menu.style.display = "grid";
     loadGames();
   }, 1200);
@@ -61,6 +67,9 @@ function launchGame(path) {
   menu.style.display = "none";
   loading.style.display = "flex";
 
+  // baisse musique pendant le jeu
+  music.volume = 0.15;
+
   setTimeout(() => {
     player.style.display = "block";
     frame.src = path;
@@ -76,4 +85,7 @@ closeBtn.onclick = () => {
   frame.src = "";
   player.style.display = "none";
   menu.style.display = "grid";
+
+  // remet la musique normale
+  music.volume = 0.35;
 };
