@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Adrien's PlayStation V4</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div id="bootScreen">
-  🎮 Cliquer pour démarrer
-</div>
+<h1>🎮 Adrien's PlayStation V4</h1>
 
-<div id="scene" class="hidden">
-  <img src="images/ps2.png" id="ps2">
-  <div id="tv">
-    <iframe id="screen" src="menu.html"></iframe>
-  </div>
-</div>
+<div id="menu"></div>
 
-<audio id="bootSound" src="sounds/ps2.mp3"></audio>
-<audio id="clickSound" src="sounds/clicks.mp3"></audio>
+<div id="player">
+  <button id="back">⬅ Retour au menu</button>
+  <iframe id="frame"></iframe>
+</div>
 
 <script src="script.js"></script>
 </body>
