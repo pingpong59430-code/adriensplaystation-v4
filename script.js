@@ -1,63 +1,57 @@
-const scene = document.getElementById("scene");
-const ps2 = document.getElementById("ps2");
-const tv = document.getElementById("tv");
-const hint = document.getElementById("hint");
+const bootScreen = document.getElementById("boot-screen");
 const menu = document.getElementById("menu");
+const gamesDiv = document.getElementById("games");
 
-/* SONS */
-const ps2Sound = new Audio("sounds/ps2.mp3");
-const clickSound = new Audio("sounds/clicks.mp3");
-const music = new Audio("sounds/music.mp3");
-music.loop = true;
-music.volume = 0.35;
+const bootSound = document.getElementById("bootSound");
+const clickSound = document.getElementById("clickSound");
 
-let step = 0;
+let started = false;
 
-/* ÉTAPE 1 : PS2 */
-ps2.addEventListener("click", () => {
-  if (step !== 0) return;
-  step = 1;
+// LISTE DES JEUX
+const games = [
+  { name: "Candy Crush", path: "games/candy-crush/index.html" },
+  { name: "Archery Game", path: "games/archery-game/index.html" },
+  { name: "Speed Typing Game", path: "games/speed-typing-game/index.html" },
+  { name: "Breakout Game", path: "games/breakout-game/index.html" },
+  { name: "Minesweeper", path: "games/minesweeper/index.html" },
+  { name: "Tetris", path: "games/tetris/index.html" },
+  { name: "Ping Pong", path: "games/ping-pong/index.html" },
+  { name: "Tower Blocks", path: "games/tower-blocks/index.html" }
+];
 
-  clickSound.play().catch(()=>{});
-  ps2.style.transform = "scale(1.05)";
-  hint.textContent = "Appuie sur la TV";
+// BOOT CLICK
+document.addEventListener("click", () => {
+  if (started) return;
+  started = true;
+
+  bootSound.play();
+
+  bootScreen.style.transition = "transform 2s, opacity 2s";
+  bootScreen.style.transform = "scale(3)";
+  bootScreen.style.opacity = "0";
+
+  setTimeout(() => {
+    bootScreen.style.display = "none";
+    showMenu();
+  }, 2000);
 });
 
-/* ÉTAPE 2 : TV */
-tv.addEventListener("click", () => {
-  if (step !== 1) return;
-  step = 2;
+function showMenu() {
+  menu.style.display = "block";
 
-  ps2Sound.play().catch(()=>{});
-  tv.style.filter = "brightness(1)";
-  hint.textContent = "";
+  games.forEach(game => {
+    const div = document.createElement("div");
+    div.className = "game";
+    div.textContent = game.name;
 
-  /* ZOOM DANS LA TV */
-  setTimeout(() => {
-    scene.style.transition = "transform 1.5s";
-    scene.style.transform = "scale(4)";
-  }, 300);
+    div.onclick = () => {
+      clickSound.currentTime = 0;
+      clickSound.play();
+      setTimeout(() => {
+        window.location.href = game.path;
+      }, 300);
+    };
 
-  /* ARRIVÉE MENU */
-  setTimeout(() => {
-    scene.style.display = "none";
-    music.play().catch(()=>{});
-    menu.style.display = "grid";
-    loadGames();
-  }, 1800);
-});
-
-/* CHARGER JEUX */
-function loadGames() {
-  fetch("games.json")
-    .then(r => r.json())
-    .then(games => {
-      menu.innerHTML = "";
-      games.forEach(game => {
-        const card = document.createElement("div");
-        card.className = "game-card";
-        card.textContent = game.name;
-        menu.appendChild(card);
-      });
-    });
+    gamesDiv.appendChild(div);
+  });
 }
