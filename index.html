@@ -4,24 +4,22 @@
   <meta charset="UTF-8" />
   <title>Adrien's PlayStation V4</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:,">
 </head>
 <body>
 
-  <!-- ÉCRAN DE DÉMARRAGE -->
+  <!-- ÉCRAN DÉMARRAGE -->
   <div id="startScreen">
     🎮 Cliquer pour démarrer
   </div>
 
   <!-- MENU -->
-  <div id="menu">
-    <div class="game-card">Candy Crush</div>
-    <div class="game-card">Archery Game</div>
-    <div class="game-card">Speed Typing Game</div>
-    <div class="game-card">Breakout Game</div>
-    <div class="game-card">Minesweeper</div>
-    <div class="game-card">Tetris</div>
-    <div class="game-card">Ping Pong</div>
-    <div class="game-card">Tower Blocks</div>
+  <div id="menu"></div>
+
+  <!-- PLAYER -->
+  <div id="player">
+    <button id="close">⬅ Retour</button>
+    <iframe id="gameFrame"></iframe>
   </div>
 
   <script src="script.js"></script>
