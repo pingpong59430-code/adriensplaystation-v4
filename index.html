@@ -3,105 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>Adrien's PlayStation V4</title>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(120deg, #001a2f, #000814);
-      color: white;
-      overflow: hidden;
-    }
-
-    #menu {
-      padding: 20px;
-    }
-
-    h1 {
-      margin-bottom: 20px;
-    }
-
-    .games {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, 160px);
-      gap: 20px;
-    }
-
-    .game-card {
-      height: 160px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 18px;
-    }
-
-    .game-card:hover {
-      background: rgba(255,255,255,0.2);
-      transform: scale(1.05);
-    }
-
-    #player {
-      display: none;
-      width: 100vw;
-      height: 100vh;
-    }
-
-    #player button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      background: black;
-    }
-
-    /* BOOT SCREEN */
-    #bootScreen {
-      position: fixed;
-      inset: 0;
-      background: black;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-
-    .boot-content {
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body> 
-  <div id="audioUnlock">
+<body>
+
+<!-- UNLOCK AUDIO -->
+<div id="audioUnlock">
   <p>🎮 Cliquer pour démarrer</p>
 </div>
 
-
+<!-- MENU -->
 <div id="menu">
   <h1>🎮 Adrien's PlayStation V4</h1>
   <div class="games"></div>
 </div>
 
+<!-- PLAYER -->
 <div id="player">
   <button onclick="closeGame()">⬅ Retour</button>
   <iframe id="gameFrame"></iframe>
 </div>
 
+<!-- BOOT SCREEN -->
 <div id="bootScreen">
   <div class="boot-content">
     <h1 id="bootTitle">Chargement…</h1>
@@ -109,48 +33,9 @@
   </div>
 </div>
 
-<script>
-const gamesContainer = document.querySelector(".games");
+<!-- AUDIO PS2 (UN SEUL FICHIER) -->
+<audio id="psSound" src="sounds/ps2.mp3"></audio>
 
-fetch("games.json")
-  .then(res => res.json())
-  .then(games => {
-    games.forEach(game => {
-      const card = document.createElement("div");
-      card.className = "game-card";
-      card.textContent = game.name;
-      card.onclick = () => launchGame(game.path, game.name);
-      gamesContainer.appendChild(card);
-    });
-  });
-
-function launchGame(path, name) {
-  const menu = document.getElementById("menu");
-  const player = document.getElementById("player");
-  const frame = document.getElementById("gameFrame");
-  const boot = document.getElementById("bootScreen");
-  const title = document.getElementById("bootTitle");
-
-  title.textContent = name;
-  menu.style.display = "none";
-  boot.style.display = "flex";
-
-  setTimeout(() => {
-    boot.style.display = "none";
-    player.style.display = "block";
-    frame.src = path;
-  }, 1200);
-}
-
-function closeGame() {
-  document.getElementById("gameFrame").src = "";
-  document.getElementById("player").style.display = "none";
-  document.getElementById("menu").style.display = "block";
-}
-</script>
-<!-- SONS PLAYSTATION -->
-<audio id="clickSound" src="sounds/click.mp3"></audio>
-<audio id="bootSound" src="sounds/boot.mp3"></audio>
-
+<script src="script.js"></script>
 </body>
 </html>
